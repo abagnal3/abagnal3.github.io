@@ -1,289 +1,177 @@
----
----
+/* Met Office external website                                                                            
 
-//
-// IMPORTS
-//
+Colours:
+- black/dark grey: #202A2C
+- dark grey: #666666      
+- grey: #DDDDDD (thin lines)
+- light grey: #EEEEEE (background colour)
+- darkish green: #BCDB0C                 
+- green: #CCFF33                         
+- darkish blue: #4BA8BA                  
+- blue: #00ADD0                          
 
-@import "reset";
-@import "variables";
-// Syntax highlighting @import is at the bottom of this file
+*/
 
-/**************/
-/* BASE RULES */
-/**************/
-
-html {
-  font-size: 100%;
-}
+/*******************************************************************************
+ * GENERAL
+ ******************************************************************************/
+/*<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700' rel='stylesheet' type='text/css'>*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700);
 
 body {
-	background: $white;
-  font: 18px/1.4 $helvetica;
-  color: $darkGray;
+    font-size: 13px;
+    font-family: "Open Sans", sans-serif !important;
+    padding: 20x; 
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 0 10px;
-  width: 100%;
+div.main {
+    width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: $helveticaNeue;
-  color: $darkerGray;
-  font-weight: bold;
-
-  line-height: 1.7;
-  margin: 1em 0 15px;
-  padding: 0;
-
-  @include mobile {
-    line-height: 1.4;
-  }
+div.tree {
+    width: 300px;
+    /*background-color: #EEEEEE;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 20px;*/
+    padding: 0.75em 0 0.75em 20px;
+    float: left;
+    position: fixed;
+    height: 97%;
+    overflow: auto;
 }
 
-h1 {
-  font-size: 30px;
-  a {
-    color: inherit;
-  }
+div.page {
+    width: 100%;
+    padding-left: 380px; /* div.tree width + L/R margins + padding */
+    box-sizing: border-box;
 }
 
-h2 {
-  font-size: 24px;
+.clear {
+    clear: both
 }
 
-h3 {
-  font-size: 20px;
+/*******************************************************************************
+ * TREE INDEX
+ ******************************************************************************/
+
+div.tree {
+    font-size: 12px;
+    color: #666666;
 }
 
-h4 {
-  font-size: 18px;
-  color: $gray;
+div.tree a, div.tree a:visited {
+    color: #666666;
+    text-decoration: none;
 }
 
-p {
-  margin: 15px 0;
+div.tree a:hover {
+    text-decoration: underline;
 }
 
-a {
-  color: $blue;
-  text-decoration: none;
-	cursor: pointer;
-  &:hover, &:active {
-    color: $blue;
-  }
+div.tree ol {
+    padding-left: 1em;
+    list-style-type: square;
 }
 
-ul, ol {
-  margin: 15px 0;
-  padding-left: 30px;
+div.tree ol ol {
+    list-style-type: circle;
 }
 
-ul {
-  list-style-type: disc;
+div.tree ol ol ol {
+    list-style-type: disc;
 }
 
-ol {
-  list-style-type: decimal;
+div.tree ol ol ol ol, div.tree ol ol ol ol ol, div.tree ol ol ol ol ol ol {
+    list-style-type: disc;
 }
 
-ol ul, ul ol, ul ul, ol ol {
-  margin: 0;
+div.tree a.show, div.tree a.hide { display: none; }
+
+/*******************************************************************************
+ * NODE PAGES
+ ******************************************************************************/
+
+/* TABLES */
+
+table {
+    border: 1px solid #AAAAAA;
 }
 
-ul ul, ol ul {
-  list-style-type: circle;
+th {
+    background-color: #EEEEEE;
 }
 
-em, i {
-  font-style: italic;
+td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: 1px solid #AAAAAA;
 }
 
-strong, b {
-  font-weight: bold;
+/* HEADINGS */
+
+div.main h1 {
+    font-weight: bold;
 }
 
-img {
-  max-width: 100%;
+div.main h2 {
+    padding-top: 1em;
+    /*padding-bottom: 0.5em;*/
+    font-weight: bold;
+    font-size: 150%;
+    color: #666666;
 }
 
-// Fixes images in popup boxes from Google Translate
-.gmnoprint img {
-  max-width: none;
+div.main h3 {
+    padding-top: 0.75em;
+    font-weight: bold;
+    font-size: 125%;
+    color: #666666;
 }
 
-.date {
-  font-style: italic;
-  color: $gray;
+/* LINKS */
+
+/*div.main a, div.main a:visited {
+    color: #005BCA;
+    text-decoration: none;
 }
 
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
-::selection {
-  color: $black;
-  background: $lightGray;
-}
+div.main a:hover, div#me a:hover {
+    text-decoration: underline;
+}*/
 
-// Nicolas Gallagher's micro clearfix hack
-// http://nicolasgallagher.com/micro-clearfix-hack/
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
+/* CODE */
+
+span.code-node {
+    /*color: #FFFF00;  /* yellow */
 }
 
-.clearfix:after {
-    clear: both;
+div.codebox, div.main code, div.main pre {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: normal;
+    font-size: 13px;
+    background-color: #EEEEEE;
+    border: 1px solid #DDDDDD;
 }
 
-/*********************/
-/* LAYOUT / SECTIONS */
-/*********************/
-
-//
-// .masthead
-//
-
-.wrapper-masthead {
-  margin-bottom: 50px;
+div.main p.tagged-text
+div.main code {
+    /*color: #859C00;*/
+    padding-left: 0.25em;
+    padding-right: 0.25em;
 }
 
-.masthead {
-  padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
-
-  @include mobile {
-    text-align: center;
-  }
+div.main pre {
+    padding: 0.25em;
+    overflow: auto !important;
+    width: 75%;
 }
 
-.site-avatar {
-  float: left;
-  width: 70px;
-  height: 70px;
-  margin-right: 15px;
 
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
+/* IMAGES */
 
-  img {
-    border-radius: 5px;
-  }
-}
+/*img {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}*/
 
-.site-info {
-  float: left;
-
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-.site-name {
-  margin: 0;
-  color: $darkGray;
-  cursor: pointer;
-  font-family: $helveticaNeue;
-  font-weight: 300;
-  font-size: 28px;
-  letter-spacing: 1px;
-}
-
-.site-description {
-  margin: -5px 0 0 0;
-  color: $gray;
-  font-size: 16px;
-
-  @include mobile {
-    margin: 3px 0;
-  }
-}
-
-nav {
-  float: right;
-  margin-top: 23px; // @TODO: Vertically middle align
-  font-family: $helveticaNeue;
-  font-size: 18px;
-
-  @include mobile {
-    float: none;
-    margin-top: 9px;
-    display: block;
-    font-size: 16px;
-  }
-
-  a {
-    margin-left: 20px;
-    color: $darkGray;
-    text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
-
-    @include mobile {
-      margin: 0 10px;
-      color: $blue;
-    }
-  }
-}
-
-//
-// .main
-//
-
-.posts > .post {
-  padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
-}
-
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
-}
-
-.post {
-  blockquote {
-    margin: 1.8em .8em;
-    border-left: 2px solid $gray;
-    padding: 0.1em 1em;
-    color: $gray;
-    font-size: 22px;
-    font-style: italic;
-  }
-
-  .comments {
-    margin-top: 10px;
-  }
-
-  .read-more {
-    text-transform: uppercase;
-    font-size: 15px;
-  }
-}
-
-.wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
-}
-
-footer {
-  padding: 20px 0;
-  text-align: center;
-}
-
-// Settled on moving the import of syntax highlighting to the bottom of the CSS
-// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
-@import "highlights";
-@import "svg-icons";
